@@ -1,5 +1,5 @@
 const data = {
-    currentCardNumber: 4,
+    currentCardNumber: 1,
     question2: null,
     question3: [],
     question4: null,
@@ -48,6 +48,22 @@ document
     })
 
 document
+    .querySelector('[data-card="3"]')
+    .addEventListener('click', event => {
+        const sElement = event.target.closest('.card-slectable')
+
+        if(!sElement){
+            return
+        }
+
+        const inputElement = sElement.querySelector('input')
+        const value = inputElement.value
+
+        toggleItem(data.question3, value)
+        ShowCard(data.currentCardNumber)
+    })
+
+document
     .querySelector('[data-card="4"]')
     .addEventListener('click', event => {
         const liElement = event.target.closest('li')
@@ -85,25 +101,43 @@ function ShowCard (n){
         cardElement
             .querySelectorAll('input')
             .forEach(inputElement => {
-                inputElement.removeAttribute('checked')
+                inputElement.checked = false
 
                 if ( inputElement.value === data.question2) {
-                    inputElement.setAttribute('checked', true)
+                    inputElement.checked = true
                 }
             })
         if(data.question2) {
             nextButton.removeAttribute('disabled')
         }
     }
-
-    if( n === 4) {
+    else if (n === 3){
         cardElement
             .querySelectorAll('input')
             .forEach(inputElement => {
                 inputElement.removeAttribute('checked')
 
+                if( inputElement.checked) {
+                    inputElement.checked = false
+                }
+
+                if ( data.question3.includes(inputElement.value )) {
+                    inputElement.checked = true
+                }
+            })
+            if(data.question3.length){
+                nextButton.removeAttribute('disabled')
+            }
+           
+    }
+    else if( n === 4) {
+        cardElement
+            .querySelectorAll('input')
+            .forEach(inputElement => {
+                inputElement.checked = false
+
                 if ( inputElement.value === data.question4) {
-                    inputElement.setAttribute('checked', true)
+                    inputElement.checked = true
                 }
             })
         if(data.question4) {
@@ -124,4 +158,14 @@ function showHeader() {
 }
 function hideHeader() {
     document.querySelector('[data-header]').style.display = 'none'
+}
+
+function toggleItem (array, item){
+    if(array.includes(item)){
+        const index = array.indexOf(item)
+        array.splice(index, 1)
+    }else{
+        array.push(item)
+    }
+
 }
