@@ -1,5 +1,5 @@
 const data = {
-    currentCardNumber: 1,
+    currentCardNumber: 5,
     question2: null,
     question3: [],
     question4: null,
@@ -76,7 +76,25 @@ document
         data.question4 = inputElement.value
 
         ShowCard(data.currentCardNumber)
-    })    
+    })  
+
+document
+    .querySelector('[data-card="5"]')
+    .addEventListener('focusout', event => {
+        const sElement = event.target.closest('.form-control')
+
+        if(!sElement || !sElement.value){
+            return
+        }               
+
+        const inputElement = document.querySelector('[data-check]')
+
+        data.question5.name = sElement.value
+        data.question5.email = sElement.value
+
+        //console.log(sElement.value)
+        ShowCard(data.currentCardNumber)
+    })  
 
 function ShowCard (n){
     if(n === 1 || n === 6){      
@@ -141,6 +159,22 @@ function ShowCard (n){
                 }
             })
         if(data.question4) {
+            nextButton.removeAttribute('disabled')
+        }
+    }
+    else if (n === 5) {
+        cardElement
+        .querySelectorAll('input')
+        .forEach(inputElement => {
+            inputElement.checked = false
+
+            if ( inputElement.value === data.question5) {
+                inputElement.checked = true
+            }
+
+           
+        })
+        if(data.question5.length){
             nextButton.removeAttribute('disabled')
         }
     }
