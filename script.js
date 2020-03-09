@@ -79,22 +79,49 @@ document
     })  
 
 document
-    .querySelector('[data-card="5"]')
-    .addEventListener('focusout', event => {
+    .querySelector('[data-control="1"]')
+    .addEventListener('keyup', event => {
         const sElement = event.target.closest('.form-control')
 
         if(!sElement || !sElement.value){
             return
-        }               
-
-        const inputElement = document.querySelector('[data-check]')
+        }              
 
         data.question5.name = sElement.value
-        data.question5.email = sElement.value
 
-        //console.log(sElement.value)
         ShowCard(data.currentCardNumber)
     })  
+
+document
+    .querySelector('[data-control="2"]')
+    .addEventListener('keyup', event => {
+        const sElement = event.target.closest('.form-control')
+
+        if(!sElement || !sElement.value){
+            return
+        }              
+
+        data.question5.email = sElement.value
+
+        ShowCard(data.currentCardNumber)
+    })
+
+document
+    .querySelector('[data-check]')
+    .addEventListener('click', event => {
+        const sElement = event.target.closest('.form-check-input')
+
+        if(sElement.checked){
+            data.question5.confirm = true
+        } else{
+            data.question5.confirm = false
+        }             
+
+        data.question5.name = sElement.value
+
+        console.log(sElement.value)
+        ShowCard(data.currentCardNumber)
+    })
 
 function ShowCard (n){
     if(n === 1 || n === 6){      
@@ -166,10 +193,8 @@ function ShowCard (n){
         cardElement
         .querySelectorAll('input')
         .forEach(inputElement => {
-            inputElement.checked = false
-
-            if ( inputElement.value === data.question5) {
-                inputElement.checked = true
+            if(data.question5.name && data.question5.email && data.question5.confirm) {
+                nextButton.removeAttribute('disabled')
             }
 
            
