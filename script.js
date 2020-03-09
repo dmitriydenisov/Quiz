@@ -116,10 +116,7 @@ document
         } else{
             data.question5.confirm = false
         }             
-
-        data.question5.name = sElement.value
-
-        console.log(sElement.value)
+        
         ShowCard(data.currentCardNumber)
     })
 
@@ -196,12 +193,8 @@ function ShowCard (n){
             if(data.question5.name && data.question5.email && data.question5.confirm) {
                 nextButton.removeAttribute('disabled')
             }
-
            
         })
-        if(data.question5.length){
-            nextButton.removeAttribute('disabled')
-        }
     }
 }
 
