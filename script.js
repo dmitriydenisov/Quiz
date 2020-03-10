@@ -110,7 +110,7 @@ document
     .querySelector('[data-check]')
     .addEventListener('click', event => {
         const sElement = event.target.closest('.form-check-input')
-
+        
         if(sElement.checked){
             data.question5.confirm = true
         } else{
