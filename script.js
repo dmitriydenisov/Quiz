@@ -1,5 +1,5 @@
 const data = {
-    currentCardNumber: 5,
+    currentCardNumber: 1,
     question2: null,
     question3: [],
     question4: null,
@@ -108,19 +108,13 @@ document
 
 document
     .querySelector('[data-check]')
-    .addEventListener('click', event => {
-        const sElement = event.target.closest('.form-check-input')
-        
-        if(sElement.checked){
-            data.question5.confirm = true
-        } else{
-            data.question5.confirm = false
-        }             
-        
+    .addEventListener('click', () => {
+        data.question5.confirm = !data.question5.confirm            
         ShowCard(data.currentCardNumber)
     })
 
 function ShowCard (n){
+    updateProgress()
     if(n === 1 || n === 6){      
         hideFooter()
         hideHeader()
@@ -220,4 +214,38 @@ function toggleItem (array, item){
         array.push(item)
     }
 
+}
+
+function updateProgress (n) {
+    const pElement = document.querySelector('[data-progressbar]')
+    let progress = 0
+
+    if(data.question2){
+        progress++
+    }
+    if(data.question3.length){
+        progress++
+    }
+    if(data.question4){
+        progress++
+    }
+    if(data.question5.name){
+        progress++
+    }
+    if(data.question5.email){
+        progress++
+    }
+    if(data.question5.confirm){
+        progress++
+    }
+
+    if(progress === 6){
+        pElement.classList.add('bg-success')
+    }
+
+    progress = progress / 6 * 100
+
+    pElement.style.width = `${progress}%`
+
+    
 }
