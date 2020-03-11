@@ -245,7 +245,5 @@ function updateProgress (n) {
 
     progress = progress / 6 * 100
 
-    pElement.style.width = `${progress}%`
-
-    
+    pElement.style.width = `${progress}%`    
 }
