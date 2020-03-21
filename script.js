@@ -1,5 +1,5 @@
 const data = {
-    currentCardNumber: 2,
+    currentCardNumber: 1,
     question2: null,
     question3: [],
     question4: null,
@@ -189,6 +189,17 @@ function ShowCard (n){
             }
            
         })
+    }
+
+    let header = document.querySelector('.card-title')
+    if( n === 2){
+        header.textContent = "Какой язык программирования используется на FrontEnd'е?"
+    } else if (n === 3) {
+        header.textContent = 'Каким редактором пользуются программисты?'
+    } else if (n === 4) {
+        header.textContent = 'Что выведет следующий код?'
+    } else if (n === 5 ){
+        header.textContent = 'Контактные данные для предложения на основе ваших ответов.'
     }
 }
 
